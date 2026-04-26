@@ -534,28 +534,28 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 
-/* Notification watch — large, top-left */
+/* Notification watch — top right cluster */
 .wf-notif {
-  width: 170px; height: 170px;
-  top: 10px; right: 10px;
+  width: 165px; height: 165px;
+  top: 5px; right: 5px;
   animation: float-a 4s ease-in-out infinite;
   border-color: rgba(52,199,89,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(52,199,89,0.12);
 }
 
-/* Heart rate watch — medium, right */
+/* Heart rate watch — middle right */
 .wf-health {
-  width: 148px; height: 148px;
-  top: 165px; right: 175px;
+  width: 142px; height: 142px;
+  top: 155px; right: 165px;
   animation: float-b 5s ease-in-out infinite;
   border-color: rgba(249,115,22,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(249,115,22,0.15);
 }
 
-/* Media watch — bottom-right */
+/* Media watch — bottom right */
 .wf-media {
-  width: 152px; height: 152px;
-  bottom: 20px; right: 20px;
+  width: 148px; height: 148px;
+  bottom: 10px; right: 8px;
   animation: float-c 4.5s ease-in-out infinite;
   border-color: rgba(59,130,246,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(59,130,246,0.12);
@@ -618,16 +618,16 @@ img { max-width: 100%; display: block; }
 .wf-health .wf-hr-unit { font-size: 9px; color: var(--orange); font-weight: 700; letter-spacing: 0.08em; margin-top: 1px; }
 
 /* Media face */
-.wf-media .wf-media-arc {
+.wf-media-ring-wrap {
   position: absolute;
-  inset: 8px;
-  border-radius: 50%;
-  border: 3px solid var(--border);
-  border-bottom-color: var(--blue);
-  border-left-color: var(--blue);
-  opacity: 0.6;
+  inset: 0;
+  pointer-events: none;
 }
-.wf-media .wf-note { font-size: 20px; margin-bottom: 2px; }
+.wf-media-ring-wrap svg {
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.wf-note-icon { margin-bottom: 2px; flex-shrink: 0; }
 .wf-media .wf-song { font-size: 10px; font-weight: 700; color: var(--text); line-height: 1.2; }
 .wf-media .wf-artist { font-size: 9px; color: var(--text2); margin-bottom: 6px; }
 .wf-media .wf-controls { display: flex; gap: 10px; align-items: center; }
@@ -1457,25 +1457,26 @@ img { max-width: 100%; display: block; }
 /* ---- iPhone mockup ---- */
 .iphone-mockup {
   position: absolute;
-  top: 50%; left: -10px;
-  transform: translateY(-62%);
-  width: 140px;
-  height: 280px;
+  top: 1%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 185px;
+  height: 370px;
   background: linear-gradient(160deg, #1c1c1e 0%, #2c2c2e 100%);
-  border-radius: 34px;
-  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 44px;
+  border: 2px solid rgba(255,255,255,0.14);
   box-shadow: 0 28px 72px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   animation: float-a 4.2s ease-in-out infinite;
-  z-index: 0;
+  z-index: 3;
 }
 [data-theme="light"] .iphone-mockup {
-  background: linear-gradient(160deg, #c8c8cc 0%, #aeaeb2 100%);
-  border-color: rgba(255,255,255,0.5);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.8);
+  background: linear-gradient(160deg, #d8d8dc 0%, #b8b8be 100%);
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 28px 72px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.9);
 }
 .iphone-notch {
   width: 52px; height: 12px;
@@ -1485,7 +1486,9 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
   position: relative;
   z-index: 2;
+  transition: background 0.3s;
 }
+[data-theme="light"] .iphone-notch { background: #1a1a1a; }
 .iphone-screen {
   flex: 1;
   width: 100%;
@@ -1496,7 +1499,7 @@ img { max-width: 100%; display: block; }
   gap: 4px;
   overflow: hidden;
 }
-[data-theme="light"] .iphone-screen { background: #0a0a0a; }
+[data-theme="light"] .iphone-screen { background: #f5f5f7; }
 .iphone-statusbar {
   display: flex;
   justify-content: space-between;
@@ -1505,7 +1508,9 @@ img { max-width: 100%; display: block; }
   color: rgba(255,255,255,0.7);
   margin-bottom: 4px;
   padding: 0 2px;
+  transition: color 0.3s;
 }
+[data-theme="light"] .iphone-statusbar { color: rgba(0,0,0,0.6); }
 .iphone-notif-pill {
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.1);
@@ -1514,7 +1519,9 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 5px;
+  transition: opacity 0.45s cubic-bezier(0.4,0,0.2,1), transform 0.45s cubic-bezier(0.4,0,0.2,1);
 }
+[data-theme="light"] .iphone-notif-pill { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.09); }
 .iph-notif-icon {
   width: 22px; height: 22px;
   border-radius: 6px;
@@ -1524,11 +1531,13 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
 }
 .iph-notif-text { display: flex; flex-direction: column; gap: 1px; flex: 1; overflow: hidden; }
-.iph-notif-app { font-size: 7.5px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; }
-.iph-notif-msg { font-size: 8.5px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.iph-notif-app { font-size: 7.5px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; transition: color 0.3s; }
+[data-theme="light"] .iph-notif-app { color: rgba(0,0,0,0.45); }
+.iph-notif-msg { font-size: 8.5px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s; }
+[data-theme="light"] .iph-notif-msg { color: rgba(0,0,0,0.85); }
 
 .iphone-health-widget {
-  background: linear-gradient(135deg, rgba(249,115,22,0.2), rgba(239,68,68,0.15));
+  background: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(239,68,68,0.12));
   border: 1px solid rgba(249,115,22,0.25);
   border-radius: 10px;
   padding: 5px 6px;
@@ -1538,9 +1547,12 @@ img { max-width: 100%; display: block; }
 }
 .iph-hw-icon { font-size: 10px; }
 .iph-hw-text { display: flex; flex-direction: column; }
-.iph-hw-label { font-size: 7px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; }
-.iph-hw-val { font-size: 13px; font-weight: 800; color: #fff; line-height: 1; }
-.iph-hw-unit { font-size: 6.5px; color: rgba(255,255,255,0.4); }
+.iph-hw-label { font-size: 7px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.3s; }
+[data-theme="light"] .iph-hw-label { color: rgba(0,0,0,0.5); }
+.iph-hw-val { font-size: 13px; font-weight: 800; color: #fff; line-height: 1; transition: color 0.3s; }
+[data-theme="light"] .iph-hw-val { color: #1a1a1a; }
+.iph-hw-unit { font-size: 6.5px; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+[data-theme="light"] .iph-hw-unit { color: rgba(0,0,0,0.45); }
 
 .iphone-media-widget {
   background: rgba(255,255,255,0.05);
@@ -1548,20 +1560,23 @@ img { max-width: 100%; display: block; }
   border-radius: 10px;
   padding: 5px 6px;
   display: flex;
-  align-items: center;
-  gap: 5px;
+  flex-direction: column;
+  gap: 3px;
 }
+[data-theme="light"] .iphone-media-widget { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.08); }
 .iph-album {
-  width: 28px; height: 28px;
-  border-radius: 7px;
+  width: 30px; height: 30px;
+  border-radius: 8px;
   background: linear-gradient(135deg, var(--orange), #f43f5e);
   display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
   flex-shrink: 0;
 }
-.iph-song { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.9); }
-.iph-artist { font-size: 6.5px; color: rgba(255,255,255,0.4); }
-.iph-controls { display: flex; gap: 4px; margin-left: auto; font-size: 10px; color: rgba(255,255,255,0.6); }
+.iph-song { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.9); transition: color 0.3s; }
+[data-theme="light"] .iph-song { color: rgba(0,0,0,0.85); }
+.iph-artist { font-size: 6.5px; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+[data-theme="light"] .iph-artist { color: rgba(0,0,0,0.5); }
+.iph-controls { display: flex; gap: 4px; margin-left: auto; font-size: 10px; color: rgba(255,255,255,0.6); transition: color 0.3s; }
+[data-theme="light"] .iph-controls { color: rgba(0,0,0,0.5); }
 
 .iphone-home-bar {
   width: 36px; height: 3px;
@@ -1573,11 +1588,11 @@ img { max-width: 100%; display: block; }
 
 /* Tablet: smaller mockup scene */
 @media (max-width: 1024px) {
-  .mockup-scene { width: 320px; height: 360px; }
-  .wf-notif { width: 130px; height: 130px; top: 8px; left: 10px; }
-  .wf-health { width: 115px; height: 115px; top: 120px; right: 5px; }
-  .wf-media { width: 120px; height: 120px; bottom: 10px; left: 30px; }
-  .iphone-mockup { width: 86px; height: 172px; border-radius: 22px; }
+  .mockup-scene { width: 340px; height: 380px; }
+  .wf-notif { width: 128px; height: 128px; top: 5px; right: 5px; }
+  .wf-health { width: 118px; height: 118px; top: 140px; right: 130px; }
+  .wf-media { width: 122px; height: 122px; bottom: 8px; right: 5px; }
+  .iphone-mockup { width: 110px; height: 222px; border-radius: 28px; left: 5px; }
   .wf-notif .wf-hr-val { font-size: 20px; }
 }
 
@@ -1671,10 +1686,7 @@ img { max-width: 100%; display: block; }
 
 /* Mobile tablet for mockup scene */
 @media (max-width: 1024px) {
-  .iphone-mockup { width: 110px; height: 220px; border-radius: 28px; left: -5px; }
-  .wf-notif { width: 130px; height: 130px; right: 5px; top: 8px; }
-  .wf-health { width: 112px; height: 112px; top: 128px; right: 133px; }
-  .wf-media { width: 118px; height: 118px; bottom: 10px; right: 5px; }
+
 }
 
 
@@ -1693,18 +1705,13 @@ img { max-width: 100%; display: block; }
 }
 .iph-progress-times {
   display: flex; justify-content: space-between;
-  font-size: 5.5px; color: rgba(255,255,255,0.35);
+  font-size: 5.5px; color: rgba(255,255,255,0.35); transition: color 0.3s;
 }
-/* Notification fade transition */
-.iphone-notif-pill {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.iphone-notif-pill.fade-out {
-  opacity: 0;
-  transform: translateY(-4px);
-}
+[data-theme="light"] .iph-progress-times { color: rgba(0,0,0,0.35); }
+/* Notification transitions handled via JS inline styles */
 /* Watch media face sync */
 .wf-song, .wf-artist { transition: opacity 0.3s ease; }
+.wf-title, .wf-body, .wf-app-name { transition: opacity 0.3s ease; }
 
 </style>
 </head>
@@ -1820,15 +1827,27 @@ img { max-width: 100%; display: block; }
 
           <!-- Media watch face -->
           <div class="watch-face wf-media" id="mockup3">
-            <div class="wf-media-arc"></div>
-            <div class="wf-inner">
-              <div class="wf-note">♪</div>
+            <div class="wf-media-ring-wrap">
+              <svg viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+                <!-- Track -->
+                <circle cx="74" cy="74" r="66" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+                <!-- Progress arc -->
+                <circle id="wfProgressRing" cx="74" cy="74" r="66"
+                  fill="none" stroke="var(--blue)" stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-dasharray="414.69"
+                  stroke-dashoffset="414.69"
+                  style="transition: stroke-dashoffset 1s linear;"/>
+              </svg>
+            </div>
+            <div class="wf-inner" style="gap:3px;">
+              <svg class="wf-note-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
               <div class="wf-song" id="wfSong">Midnight Rain</div>
               <div class="wf-artist" id="wfArtist">Taylor Swift</div>
               <div class="wf-controls">
-                <span class="wf-btn">⏮</span>
-                <span class="wf-btn wf-btn-play">⏸</span>
-                <span class="wf-btn">⏭</span>
+                <span class="wf-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/></svg></span>
+                <span class="wf-btn wf-btn-play"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></span>
+                <span class="wf-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/></svg></span>
               </div>
             </div>
           </div>
@@ -1860,7 +1879,7 @@ img { max-width: 100%; display: block; }
               <!-- Media playing -->
               <div class="iphone-media-widget" id="iphMediaWidget">
                 <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
-                  <div class="iph-album" id="iphAlbumIcon">♪</div>
+                  <div class="iph-album" id="iphAlbumIcon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
                   <div style="flex:1;min-width:0;">
                     <div class="iph-song" id="iphSong">Midnight Rain</div>
                     <div class="iph-artist" id="iphArtist">Taylor Swift</div>
@@ -2578,9 +2597,9 @@ setInterval(updateIphTime, 10000);
 
 /* ---- Animated Songs (cycle 2-3 songs with live progress bar) ---- */
 const SONGS = [
-  { title: 'Midnight Rain',  artist: 'Taylor Swift',   icon: '♪', dur: 204, color: '#f43f5e' },
-  { title: 'Blinding Lights', artist: 'The Weeknd',    icon: '🎵', dur: 200, color: '#F97316' },
-  { title: 'As It Was',       artist: 'Harry Styles',  icon: '🎶', dur: 167, color: '#22D3EE' },
+  { title: 'Midnight Rain',  artist: 'Taylor Swift',   dur: 204, color: '#f43f5e' },
+  { title: 'Blinding Lights', artist: 'The Weeknd',   dur: 200, color: '#F97316' },
+  { title: 'As It Was',       artist: 'Harry Styles', dur: 167, color: '#22D3EE' },
 ];
 let songIdx = 0;
 let songElapsed = 0; // seconds
@@ -2601,7 +2620,10 @@ function loadSong(idx, startAt = 0) {
   const iphDur = document.getElementById('iphDuration');
   if (iphSong) iphSong.textContent = s.title;
   if (iphArtist) iphArtist.textContent = s.artist;
-  if (iphAlbum) { iphAlbum.textContent = s.icon; iphAlbum.style.background = `linear-gradient(135deg, ${s.color}, #1a1a2e)`; }
+  if (iphAlbum) { iphAlbum.style.background = `linear-gradient(135deg, ${s.color}, #1a1a2e)`; }
+  // Update watch ring color
+  const ring = document.getElementById('wfProgressRing');
+  if (ring) { ring.style.stroke = s.color; ring.style.strokeDashoffset = '414.69'; ring.style.transition = 'none'; setTimeout(() => { ring.style.transition = 'stroke-dashoffset 1s linear'; }, 50); }
   if (iphDur) iphDur.textContent = fmtTime(s.dur);
 
   // Update watch face
@@ -2621,6 +2643,9 @@ function tickSong() {
   const cur = document.getElementById('iphCurrent');
   if (fill) fill.style.width = pct + '%';
   if (cur) cur.textContent = fmtTime(songElapsed);
+  // Update watch ring — dashoffset goes from 414.69 (empty) to 0 (full)
+  const ring = document.getElementById('wfProgressRing');
+  if (ring) ring.style.strokeDashoffset = (414.69 * (1 - pct / 100)).toFixed(2);
 
   // Song ended → next song
   if (songElapsed >= s.dur) {
@@ -2629,41 +2654,102 @@ function tickSong() {
   }
 }
 
-loadSong(0, 18); // start 18s into first song so progress bar is visible immediately
+loadSong(0, 18);
+// Init ring immediately
+requestAnimationFrame(() => {
+  const ring = document.getElementById('wfProgressRing');
+  if (ring) { const s = SONGS[0]; ring.style.stroke = s.color; const pct = 18/s.dur*100; ring.style.strokeDashoffset = (414.69*(1-pct/100)).toFixed(2); }
+});
 setInterval(tickSong, 1000);
 
 /* ---- Rotating notifications (3-5 messages cycle every 3-4s) ---- */
+function getNotifSVG(type) {
+  const s = 'stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"';
+  if (type === 'msg')  return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`;
+  if (type === 'img')  return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="white" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>`;
+  if (type === 'mail') return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`;
+  if (type === 'bell') return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`;
+  return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`;
+}
+
 const NOTIFS = [
-  { icon: '💬', app: 'Messages · now',    msg: 'Hey! Are you free tonight? 👋' },
-  { icon: '📸', app: 'Instagram · 2m ago', msg: 'Sarah liked your photo ❤️' },
-  { icon: '📧', app: 'Mail · 5m ago',      msg: 'Your weekly summary is ready' },
-  { icon: '💬', app: 'WhatsApp · 1m ago',  msg: 'Voice message from Alex 🎙️' },
-  { icon: '🔔', app: 'Reminders · now',   msg: 'Pick up groceries on the way' },
+  { icon: 'msg',  color: '#34c759', app: 'Messages · now',     msg: 'Hey! Are you free tonight?', watchApp: 'Messages', watchMsg: 'Free tonight?' },
+  { icon: 'img',  color: '#e1306c', app: 'Instagram · 2m ago', msg: 'Sarah liked your photo',      watchApp: 'Instagram', watchMsg: 'Liked your photo' },
+  { icon: 'mail', color: '#3B82F6', app: 'Mail · 5m ago',       msg: 'Your weekly summary is ready', watchApp: 'Mail', watchMsg: 'Weekly summary' },
+  { icon: 'msg',  color: '#25d366', app: 'WhatsApp · 1m ago',   msg: 'Voice message from Alex',     watchApp: 'WhatsApp', watchMsg: 'Voice msg · Alex' },
+  { icon: 'bell', color: '#F97316', app: 'Reminders · now',    msg: 'Pick up groceries',           watchApp: 'Reminder', watchMsg: 'Pick up groceries' },
 ];
 let notifIdx = 0;
 
-function rotateNotif() {
-  const pill = document.getElementById('iphNotif');
-  if (!pill) return;
-
-  // Fade out
-  pill.classList.add('fade-out');
-
+function fadeEl(el, newContent, delay = 0) {
+  if (!el) return;
   setTimeout(() => {
-    notifIdx = (notifIdx + 1) % NOTIFS.length;
-    const n = NOTIFS[notifIdx];
-    const icon = document.getElementById('iphNotifIcon');
-    const app  = document.getElementById('iphNotifApp');
-    const msg  = document.getElementById('iphNotifMsg');
-    if (icon) icon.textContent = n.icon;
-    if (app)  app.textContent  = n.app;
-    if (msg)  msg.textContent  = n.msg;
-    pill.classList.remove('fade-out');
-  }, 420);
+    el.style.transition = 'opacity 0.35s ease';
+    el.style.opacity = '0';
+    setTimeout(() => {
+      if (typeof newContent === 'function') newContent(el);
+      else el.textContent = newContent;
+      el.style.opacity = '1';
+    }, 360);
+  }, delay);
 }
 
-// Rotate every 3.5 seconds
-setInterval(rotateNotif, 3500);
+function rotateNotif() {
+  notifIdx = (notifIdx + 1) % NOTIFS.length;
+  const n = NOTIFS[notifIdx];
+
+  // --- iPhone: fade entire pill ---
+  const pill = document.getElementById('iphNotif');
+  if (pill) {
+    pill.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    pill.style.opacity = '0';
+    pill.style.transform = 'translateY(-6px)';
+    setTimeout(() => {
+      const icon = document.getElementById('iphNotifIcon');
+      const app  = document.getElementById('iphNotifApp');
+      const msg  = document.getElementById('iphNotifMsg');
+      if (icon) icon.textContent = n.icon;
+      if (app)  app.textContent  = n.app;
+      if (msg)  msg.textContent  = n.msg;
+      pill.style.transform = 'translateY(6px)';
+      requestAnimationFrame(() => {
+        pill.style.opacity = '1';
+        pill.style.transform = 'translateY(0)';
+      });
+    }, 370);
+  }
+
+  // --- Watch face: fade title + body simultaneously ---
+  const wfDot     = document.querySelector('.wf-app-dot');
+  const wfAppName = document.querySelector('.wf-app-name');
+  const wfTitle   = document.querySelector('.wf-title');
+  const wfBody    = document.querySelector('.wf-body');
+
+  [wfDot, wfAppName, wfTitle, wfBody].forEach(el => {
+    if (el) { el.style.transition = 'opacity 0.35s ease'; el.style.opacity = '0'; }
+  });
+  setTimeout(() => {
+    if (wfDot)     wfDot.textContent     = n.icon;
+    if (wfAppName) wfAppName.textContent = n.watchApp;
+    if (wfTitle)   wfTitle.textContent   = n.watchApp;
+    if (wfBody)    wfBody.textContent    = n.watchMsg;
+    [wfDot, wfAppName, wfTitle, wfBody].forEach(el => {
+      if (el) el.style.opacity = '1';
+    });
+  }, 370);
+}
+
+// Rotate every 3.8 seconds
+setInterval(rotateNotif, 3800);
+
+// Init first notif icon
+(function initFirstNotif() {
+  const icon = document.getElementById('iphNotifIcon');
+  const wfDot = document.querySelector('.wf-app-dot');
+  const n = NOTIFS[0];
+  if (icon) { icon.style.background = `linear-gradient(135deg, ${n.color}, ${n.color}cc)`; icon.innerHTML = getNotifSVG(n.icon); }
+  if (wfDot) { wfDot.style.background = `linear-gradient(135deg, ${n.color}, ${n.color}cc)`; wfDot.innerHTML = getNotifSVG(n.icon); }
+})();
 
 /* ---- Scroll Reveal (Intersection Observer) ---- */
 const revealEls = document.querySelectorAll('.reveal');
