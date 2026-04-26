@@ -535,28 +535,28 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 
-/* Notification watch — large, top-left */
+/* Notification watch — top right cluster */
 .wf-notif {
-  width: 170px; height: 170px;
-  top: 10px; right: 10px;
+  width: 165px; height: 165px;
+  top: 5px; right: 5px;
   animation: float-a 4s ease-in-out infinite;
   border-color: rgba(52,199,89,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(52,199,89,0.12);
 }
 
-/* Heart rate watch — medium, right */
+/* Heart rate watch — middle right */
 .wf-health {
-  width: 148px; height: 148px;
-  top: 165px; right: 175px;
+  width: 142px; height: 142px;
+  top: 155px; right: 165px;
   animation: float-b 5s ease-in-out infinite;
   border-color: rgba(249,115,22,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(249,115,22,0.15);
 }
 
-/* Media watch — bottom-right */
+/* Media watch — bottom right */
 .wf-media {
-  width: 152px; height: 152px;
-  bottom: 20px; right: 20px;
+  width: 148px; height: 148px;
+  bottom: 10px; right: 8px;
   animation: float-c 4.5s ease-in-out infinite;
   border-color: rgba(59,130,246,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(59,130,246,0.12);
@@ -619,16 +619,16 @@ img { max-width: 100%; display: block; }
 .wf-health .wf-hr-unit { font-size: 9px; color: var(--orange); font-weight: 700; letter-spacing: 0.08em; margin-top: 1px; }
 
 /* Media face */
-.wf-media .wf-media-arc {
+.wf-media-ring-wrap {
   position: absolute;
-  inset: 8px;
-  border-radius: 50%;
-  border: 3px solid var(--border);
-  border-bottom-color: var(--blue);
-  border-left-color: var(--blue);
-  opacity: 0.6;
+  inset: 0;
+  pointer-events: none;
 }
-.wf-media .wf-note { font-size: 20px; margin-bottom: 2px; }
+.wf-media-ring-wrap svg {
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.wf-note-icon { margin-bottom: 2px; flex-shrink: 0; }
 .wf-media .wf-song { font-size: 10px; font-weight: 700; color: var(--text); line-height: 1.2; }
 .wf-media .wf-artist { font-size: 9px; color: var(--text2); margin-bottom: 6px; }
 .wf-media .wf-controls { display: flex; gap: 10px; align-items: center; }
@@ -1458,25 +1458,26 @@ img { max-width: 100%; display: block; }
 /* ---- iPhone mockup ---- */
 .iphone-mockup {
   position: absolute;
-  top: 50%; left: -10px;
-  transform: translateY(-62%);
-  width: 140px;
-  height: 280px;
+  top: 10%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 162px;
+  height: 324px;
   background: linear-gradient(160deg, #1c1c1e 0%, #2c2c2e 100%);
-  border-radius: 34px;
-  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 38px;
+  border: 2px solid rgba(255,255,255,0.14);
   box-shadow: 0 28px 72px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   animation: float-a 4.2s ease-in-out infinite;
-  z-index: 0;
+  z-index: 3;
 }
 [data-theme="light"] .iphone-mockup {
-  background: linear-gradient(160deg, #c8c8cc 0%, #aeaeb2 100%);
-  border-color: rgba(255,255,255,0.5);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.8);
+  background: linear-gradient(160deg, #d8d8dc 0%, #b8b8be 100%);
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 28px 72px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.9);
 }
 .iphone-notch {
   width: 52px; height: 12px;
@@ -1486,7 +1487,9 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
   position: relative;
   z-index: 2;
+  transition: background 0.3s;
 }
+[data-theme="light"] .iphone-notch { background: #1a1a1a; }
 .iphone-screen {
   flex: 1;
   width: 100%;
@@ -1497,7 +1500,7 @@ img { max-width: 100%; display: block; }
   gap: 4px;
   overflow: hidden;
 }
-[data-theme="light"] .iphone-screen { background: #0a0a0a; }
+[data-theme="light"] .iphone-screen { background: #f5f5f7; }
 .iphone-statusbar {
   display: flex;
   justify-content: space-between;
@@ -1506,7 +1509,9 @@ img { max-width: 100%; display: block; }
   color: rgba(255,255,255,0.7);
   margin-bottom: 4px;
   padding: 0 2px;
+  transition: color 0.3s;
 }
+[data-theme="light"] .iphone-statusbar { color: rgba(0,0,0,0.6); }
 .iphone-notif-pill {
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.1);
@@ -1515,7 +1520,9 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 5px;
+  transition: opacity 0.45s cubic-bezier(0.4,0,0.2,1), transform 0.45s cubic-bezier(0.4,0,0.2,1);
 }
+[data-theme="light"] .iphone-notif-pill { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.09); }
 .iph-notif-icon {
   width: 22px; height: 22px;
   border-radius: 6px;
@@ -1525,11 +1532,13 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
 }
 .iph-notif-text { display: flex; flex-direction: column; gap: 1px; flex: 1; overflow: hidden; }
-.iph-notif-app { font-size: 7.5px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; }
-.iph-notif-msg { font-size: 8.5px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.iph-notif-app { font-size: 7.5px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; transition: color 0.3s; }
+[data-theme="light"] .iph-notif-app { color: rgba(0,0,0,0.45); }
+.iph-notif-msg { font-size: 8.5px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s; }
+[data-theme="light"] .iph-notif-msg { color: rgba(0,0,0,0.85); }
 
 .iphone-health-widget {
-  background: linear-gradient(135deg, rgba(249,115,22,0.2), rgba(239,68,68,0.15));
+  background: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(239,68,68,0.12));
   border: 1px solid rgba(249,115,22,0.25);
   border-radius: 10px;
   padding: 5px 6px;
@@ -1539,9 +1548,12 @@ img { max-width: 100%; display: block; }
 }
 .iph-hw-icon { font-size: 10px; }
 .iph-hw-text { display: flex; flex-direction: column; }
-.iph-hw-label { font-size: 7px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; }
-.iph-hw-val { font-size: 13px; font-weight: 800; color: #fff; line-height: 1; }
-.iph-hw-unit { font-size: 6.5px; color: rgba(255,255,255,0.4); }
+.iph-hw-label { font-size: 7px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.3s; }
+[data-theme="light"] .iph-hw-label { color: rgba(0,0,0,0.5); }
+.iph-hw-val { font-size: 13px; font-weight: 800; color: #fff; line-height: 1; transition: color 0.3s; }
+[data-theme="light"] .iph-hw-val { color: #1a1a1a; }
+.iph-hw-unit { font-size: 6.5px; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+[data-theme="light"] .iph-hw-unit { color: rgba(0,0,0,0.45); }
 
 .iphone-media-widget {
   background: rgba(255,255,255,0.05);
@@ -1549,20 +1561,23 @@ img { max-width: 100%; display: block; }
   border-radius: 10px;
   padding: 5px 6px;
   display: flex;
-  align-items: center;
-  gap: 5px;
+  flex-direction: column;
+  gap: 3px;
 }
+[data-theme="light"] .iphone-media-widget { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.08); }
 .iph-album {
-  width: 28px; height: 28px;
-  border-radius: 7px;
+  width: 30px; height: 30px;
+  border-radius: 8px;
   background: linear-gradient(135deg, var(--orange), #f43f5e);
   display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
   flex-shrink: 0;
 }
-.iph-song { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.9); }
-.iph-artist { font-size: 6.5px; color: rgba(255,255,255,0.4); }
-.iph-controls { display: flex; gap: 4px; margin-left: auto; font-size: 10px; color: rgba(255,255,255,0.6); }
+.iph-song { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.9); transition: color 0.3s; }
+[data-theme="light"] .iph-song { color: rgba(0,0,0,0.85); }
+.iph-artist { font-size: 6.5px; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+[data-theme="light"] .iph-artist { color: rgba(0,0,0,0.5); }
+.iph-controls { display: flex; gap: 4px; margin-left: auto; font-size: 10px; color: rgba(255,255,255,0.6); transition: color 0.3s; }
+[data-theme="light"] .iph-controls { color: rgba(0,0,0,0.5); }
 
 .iphone-home-bar {
   width: 36px; height: 3px;
@@ -1574,11 +1589,11 @@ img { max-width: 100%; display: block; }
 
 /* Tablet: smaller mockup scene */
 @media (max-width: 1024px) {
-  .mockup-scene { width: 320px; height: 360px; }
-  .wf-notif { width: 130px; height: 130px; top: 8px; left: 10px; }
-  .wf-health { width: 115px; height: 115px; top: 120px; right: 5px; }
-  .wf-media { width: 120px; height: 120px; bottom: 10px; left: 30px; }
-  .iphone-mockup { width: 86px; height: 172px; border-radius: 22px; }
+  .mockup-scene { width: 340px; height: 380px; }
+  .wf-notif { width: 128px; height: 128px; top: 5px; right: 5px; }
+  .wf-health { width: 118px; height: 118px; top: 140px; right: 130px; }
+  .wf-media { width: 122px; height: 122px; bottom: 8px; right: 5px; }
+  .iphone-mockup { width: 110px; height: 222px; border-radius: 28px; left: 5px; }
   .wf-notif .wf-hr-val { font-size: 20px; }
 }
 
@@ -1672,10 +1687,7 @@ img { max-width: 100%; display: block; }
 
 /* Mobile tablet for mockup scene */
 @media (max-width: 1024px) {
-  .iphone-mockup { width: 110px; height: 220px; border-radius: 28px; left: -5px; }
-  .wf-notif { width: 130px; height: 130px; right: 5px; top: 8px; }
-  .wf-health { width: 112px; height: 112px; top: 128px; right: 133px; }
-  .wf-media { width: 118px; height: 118px; bottom: 10px; right: 5px; }
+
 }
 
 
@@ -1694,22 +1706,126 @@ img { max-width: 100%; display: block; }
 }
 .iph-progress-times {
   display: flex; justify-content: space-between;
-  font-size: 5.5px; color: rgba(255,255,255,0.35);
+  font-size: 5.5px; color: rgba(255,255,255,0.35); transition: color 0.3s;
 }
-/* Notification fade transition */
-.iphone-notif-pill {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.iphone-notif-pill.fade-out {
-  opacity: 0;
-  transform: translateY(-4px);
-}
+[data-theme="light"] .iph-progress-times { color: rgba(0,0,0,0.35); }
+/* Notification transitions handled via JS inline styles */
 /* Watch media face sync */
 .wf-song, .wf-artist { transition: opacity 0.3s ease; }
+.wf-title, .wf-body, .wf-app-name { transition: opacity 0.3s ease; }
 
 
 
 /* ── FAQ page extras ── */
+/* ── FAQ Search ── */
+.faq-search-wrap {
+  max-width: 540px;
+  margin: 0 auto 32px;
+  position: relative;
+}
+.faq-search-input {
+  width: 100%;
+  padding: 13px 20px 13px 46px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-body);
+  transition: all var(--trans);
+  outline: none;
+}
+.faq-search-input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
+  background: var(--surface-hover);
+}
+.faq-search-input::placeholder { color: var(--text3); }
+.faq-search-icon {
+  position: absolute;
+  left: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  pointer-events: none;
+  font-size: 15px;
+}
+
+.faq-search-clear {
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  background: var(--surface-hover);
+  border: none;
+  border-radius: 50%;
+  width: 22px; height: 22px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all var(--trans);
+  line-height: 1;
+}
+.faq-search-clear:hover { background: var(--border); color: var(--text); }
+.faq-search-clear.visible { display: flex; }
+
+.faq-no-results {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text3);
+  font-size: 14px;
+  display: none;
+}
+
+/* ── FAQ Anchor link ── */
+.faq-anchor-btn {
+  opacity: 0;
+  font-size: 12px;
+  color: var(--text3);
+  text-decoration: none;
+  padding: 2px 5px;
+  border-radius: 4px;
+  transition: opacity 0.2s, color 0.2s, background 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.faq-anchor-btn:hover { color: var(--orange); background: rgba(249,115,22,0.08); }
+.faq-q:hover .faq-anchor-btn { opacity: 1; }
+.faq-q {
+  gap: 0;
+}
+/* Push anchor+chevron group to far right */
+.faq-q-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  flex-shrink: 0;
+  padding-left: 12px;
+}
+.faq-q-text {
+  flex: 1;
+  text-align: left;
+}
+
+/* ── FAQ Highlight (when opened via anchor link) ── */
+.faq-item.highlight {
+  border-color: var(--orange) !important;
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
+  animation: faq-highlight-pulse 1.2s ease forwards;
+}
+@keyframes faq-highlight-pulse {
+  0%   { box-shadow: 0 0 0 0px rgba(249,115,22,0.4); }
+  50%  { box-shadow: 0 0 0 8px rgba(249,115,22,0.1); }
+  100% { box-shadow: 0 0 0 3px rgba(249,115,22,0.08); }
+}
+
+/* Search match highlight */
+.faq-item.search-match { display: block; }
+.faq-item.search-hidden { display: none; }
+.search-hl { background: rgba(249,115,22,0.25); border-radius: 2px; padding: 0 1px; }
+
 .faq-page-hero {
   padding: calc(var(--nav-h) + 80px) 0 48px;
   position: relative;
@@ -1929,6 +2045,12 @@ img { max-width: 100%; display: block; }
     <div class="section-label reveal">Help Center</div>
     <h1 class="reveal reveal-delay-1">Frequently Asked Questions</h1>
     <p class="reveal reveal-delay-2">Find answers to common questions about Bridge — connecting your Wear OS watch to your iPhone.</p>
+    <div class="faq-search-wrap reveal reveal-delay-3">
+      <span class="faq-search-icon">🔍</span>
+      <input type="text" class="faq-search-input" id="faqSearch" placeholder="Search questions..." autocomplete="off" />
+      <button class="faq-search-clear" id="faqClear" aria-label="Clear search">✕</button>
+    </div>
+    <div class="faq-no-results" id="faqNoResults">No questions found. Try different keywords.</div>
     <div class="faq-filters reveal reveal-delay-3">
       <button class="faq-filter active" data-filter="all">All Questions</button>
       <button class="faq-filter" data-filter="installation">Installation</button>
@@ -1945,8 +2067,8 @@ img { max-width: 100%; display: block; }
   <div class="faq-group reveal" data-category="installation">
     <div class="faq-group-label">Installation</div>
 
-    <div class="faq-item" data-category="installation">
-      <button class="faq-q">How do I install Bridge on my Wear OS watch? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-1" data-category="installation">
+      <button class="faq-q"><span class="faq-q-text">How do I install Bridge on my Wear OS watch?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-1" title="Copy link" onclick="copyFaqLink('faq-1', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ol>
           <li>Open the <strong>Play Store</strong> on your Wear OS watch.</li>
@@ -1957,8 +2079,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="installation">
-      <button class="faq-q">Do I need to install Bridge on my iPhone too? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-2" data-category="installation">
+      <button class="faq-q"><span class="faq-q-text">Do I need to install Bridge on my iPhone too?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-2" title="Copy link" onclick="copyFaqLink('faq-2', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <p><strong>Yes.</strong> Bridge requires both the iOS app and the Wear OS app to function:</p>
         <ul>
@@ -1969,8 +2091,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="installation">
-      <button class="faq-q">How do I manually install the Bridge APK on my watch? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-3" data-category="installation">
+      <button class="faq-q"><span class="faq-q-text">How do I manually install the Bridge APK on my watch?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-3" title="Copy link" onclick="copyFaqLink('faq-3', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <p>If the Play Store isn't available, you can sideload the APK:</p>
         <ol>
@@ -1983,8 +2105,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="installation">
-      <button class="faq-q">How do I set up my watch for an uninterrupted experience? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-4" data-category="installation">
+      <button class="faq-q"><span class="faq-q-text">How do I set up my watch for an uninterrupted experience?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-4" title="Copy link" onclick="copyFaqLink('faq-4', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ol>
           <li><strong>Battery Optimization:</strong> Disable it for Bridge — Settings → Apps → Bridge → Battery → Unrestricted.</li>
@@ -1999,8 +2121,8 @@ img { max-width: 100%; display: block; }
   <div class="faq-group reveal" data-category="connectivity">
     <div class="faq-group-label">Connectivity</div>
 
-    <div class="faq-item" data-category="connectivity">
-      <button class="faq-q">How do I pair my Wear OS watch with my iPhone? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-5" data-category="connectivity">
+      <button class="faq-q"><span class="faq-q-text">How do I pair my Wear OS watch with my iPhone?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-5" title="Copy link" onclick="copyFaqLink('faq-5', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ol>
           <li>Install Bridge on both your iPhone and Wear OS watch.</li>
@@ -2013,8 +2135,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="connectivity">
-      <button class="faq-q">How far can my watch be from my iPhone? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-6" data-category="connectivity">
+      <button class="faq-q"><span class="faq-q-text">How far can my watch be from my iPhone?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-6" title="Copy link" onclick="copyFaqLink('faq-6', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <p>Bridge uses Bluetooth, which typically supports:</p>
         <ul>
@@ -2025,8 +2147,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="connectivity">
-      <button class="faq-q">Does Bridge work when my iPhone is offline? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-7" data-category="connectivity">
+      <button class="faq-q"><span class="faq-q-text">Does Bridge work when my iPhone is offline?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-7" title="Copy link" onclick="copyFaqLink('faq-7', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ul>
           <li><strong>Health data</strong> is stored locally on your watch and synced when reconnected.</li>
@@ -2041,8 +2163,8 @@ img { max-width: 100%; display: block; }
   <div class="faq-group reveal" data-category="features">
     <div class="faq-group-label">Features</div>
 
-    <div class="faq-item" data-category="features">
-      <button class="faq-q">What notifications can I receive on my watch? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-8" data-category="features">
+      <button class="faq-q"><span class="faq-q-text">What notifications can I receive on my watch?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-8" title="Copy link" onclick="copyFaqLink('faq-8', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <p>Bridge forwards nearly all iPhone notifications including:</p>
         <ul>
@@ -2056,8 +2178,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="features">
-      <button class="faq-q">Does Bridge sync health data to Apple Health? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-9" data-category="features">
+      <button class="faq-q"><span class="faq-q-text">Does Bridge sync health data to Apple Health?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-9" title="Copy link" onclick="copyFaqLink('faq-9', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <p><strong>Yes!</strong> Bridge syncs these metrics from your Wear OS watch to Apple Health:</p>
         <ul>
@@ -2071,8 +2193,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="features">
-      <button class="faq-q">How do I use the File Manager feature? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-10" data-category="features">
+      <button class="faq-q"><span class="faq-q-text">How do I use the File Manager feature?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-10" title="Copy link" onclick="copyFaqLink('faq-10', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ol>
           <li>Open Bridge on your iPhone and tap <strong>File Manager</strong>.</li>
@@ -2084,8 +2206,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="features">
-      <button class="faq-q">How do I enable call handling on my watch? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-11" data-category="features">
+      <button class="faq-q"><span class="faq-q-text">How do I enable call handling on my watch?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-11" title="Copy link" onclick="copyFaqLink('faq-11', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ol>
           <li>Open Bridge on your iPhone.</li>
@@ -2101,8 +2223,8 @@ img { max-width: 100%; display: block; }
   <div class="faq-group reveal" data-category="troubleshooting">
     <div class="faq-group-label">Troubleshooting</div>
 
-    <div class="faq-item" data-category="troubleshooting">
-      <button class="faq-q">Why am I not receiving notifications from some apps like WhatsApp? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-12" data-category="troubleshooting">
+      <button class="faq-q"><span class="faq-q-text">Why am I not receiving notifications from some apps like WhatsApp?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-12" title="Copy link" onclick="copyFaqLink('faq-12', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ul>
           <li>Go to iPhone <strong>Settings → Notifications → [App]</strong> and set "Show Previews" to <strong>Always</strong>.</li>
@@ -2112,8 +2234,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="troubleshooting">
-      <button class="faq-q">My health data isn't syncing. What can I do? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-13" data-category="troubleshooting">
+      <button class="faq-q"><span class="faq-q-text">My health data isn't syncing. What can I do?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-13" title="Copy link" onclick="copyFaqLink('faq-13', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ol>
           <li>Check <strong>Health permissions</strong>: iPhone Settings → Privacy → Health → Bridge → enable all.</li>
@@ -2125,8 +2247,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="troubleshooting">
-      <button class="faq-q">Why does the iOS app stop working in the background? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-14" data-category="troubleshooting">
+      <button class="faq-q"><span class="faq-q-text">Why does the iOS app stop working in the background?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-14" title="Copy link" onclick="copyFaqLink('faq-14', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ul>
           <li>Go to iPhone <strong>Settings → Bridge → Background App Refresh</strong> → Enable.</li>
@@ -2137,8 +2259,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="troubleshooting">
-      <button class="faq-q">How do I hide the phone disconnected icon on my watch? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-15" data-category="troubleshooting">
+      <button class="faq-q"><span class="faq-q-text">How do I hide the phone disconnected icon on my watch?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-15" title="Copy link" onclick="copyFaqLink('faq-15', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ol>
           <li>On your Wear OS watch, go to <strong>Settings → Connectivity → Bluetooth</strong>.</li>
@@ -2152,8 +2274,8 @@ img { max-width: 100%; display: block; }
   <div class="faq-group reveal" data-category="health">
     <div class="faq-group-label">Health &amp; Fitness</div>
 
-    <div class="faq-item" data-category="health">
-      <button class="faq-q">What health metrics does Bridge support? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-16" data-category="health">
+      <button class="faq-q"><span class="faq-q-text">What health metrics does Bridge support?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-16" title="Copy link" onclick="copyFaqLink('faq-16', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ul>
           <li>Steps and distance walked/run</li>
@@ -2165,8 +2287,8 @@ img { max-width: 100%; display: block; }
       </div></div>
     </div>
 
-    <div class="faq-item" data-category="health">
-      <button class="faq-q">How often does health data sync? <span class="faq-chevron">▾</span></button>
+    <div class="faq-item" id="faq-17" data-category="health">
+      <button class="faq-q"><span class="faq-q-text">How often does health data sync?</span><div class="faq-q-right"><a class="faq-anchor-btn" href="#faq-17" title="Copy link" onclick="copyFaqLink('faq-17', event)">🔗</a><span class="faq-chevron">▾</span></div></button>
       <div class="faq-answer"><div class="faq-answer-inner">
         <ul>
           <li><strong>Free plan:</strong> Syncs when you open the Bridge app on your iPhone.</li>
@@ -2222,7 +2344,7 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="footer-col">
           <h4>Support</h4>
-          <a href="bridge_faq.html">FAQ</a>
+          <a href="index_faq.html">FAQ</a>
           <a href="index.html#contact">Contact</a>
           <a href="https://www.reddit.com/r/orienlabs/" target="_blank">Community</a>
         </div>
@@ -2462,9 +2584,9 @@ setInterval(updateIphTime, 10000);
 
 /* ---- Animated Songs (cycle 2-3 songs with live progress bar) ---- */
 const SONGS = [
-  { title: 'Midnight Rain',  artist: 'Taylor Swift',   icon: '♪', dur: 204, color: '#f43f5e' },
-  { title: 'Blinding Lights', artist: 'The Weeknd',    icon: '🎵', dur: 200, color: '#F97316' },
-  { title: 'As It Was',       artist: 'Harry Styles',  icon: '🎶', dur: 167, color: '#22D3EE' },
+  { title: 'Midnight Rain',  artist: 'Taylor Swift',   dur: 204, color: '#f43f5e' },
+  { title: 'Blinding Lights', artist: 'The Weeknd',   dur: 200, color: '#F97316' },
+  { title: 'As It Was',       artist: 'Harry Styles', dur: 167, color: '#22D3EE' },
 ];
 let songIdx = 0;
 let songElapsed = 0; // seconds
@@ -2485,7 +2607,10 @@ function loadSong(idx, startAt = 0) {
   const iphDur = document.getElementById('iphDuration');
   if (iphSong) iphSong.textContent = s.title;
   if (iphArtist) iphArtist.textContent = s.artist;
-  if (iphAlbum) { iphAlbum.textContent = s.icon; iphAlbum.style.background = `linear-gradient(135deg, ${s.color}, #1a1a2e)`; }
+  if (iphAlbum) { iphAlbum.style.background = `linear-gradient(135deg, ${s.color}, #1a1a2e)`; }
+  // Update watch ring color
+  const ring = document.getElementById('wfProgressRing');
+  if (ring) { ring.style.stroke = s.color; ring.style.strokeDashoffset = '414.69'; ring.style.transition = 'none'; setTimeout(() => { ring.style.transition = 'stroke-dashoffset 1s linear'; }, 50); }
   if (iphDur) iphDur.textContent = fmtTime(s.dur);
 
   // Update watch face
@@ -2505,6 +2630,9 @@ function tickSong() {
   const cur = document.getElementById('iphCurrent');
   if (fill) fill.style.width = pct + '%';
   if (cur) cur.textContent = fmtTime(songElapsed);
+  // Update watch ring — dashoffset goes from 414.69 (empty) to 0 (full)
+  const ring = document.getElementById('wfProgressRing');
+  if (ring) ring.style.strokeDashoffset = (414.69 * (1 - pct / 100)).toFixed(2);
 
   // Song ended → next song
   if (songElapsed >= s.dur) {
@@ -2513,41 +2641,102 @@ function tickSong() {
   }
 }
 
-loadSong(0, 18); // start 18s into first song so progress bar is visible immediately
+loadSong(0, 18);
+// Init ring immediately
+requestAnimationFrame(() => {
+  const ring = document.getElementById('wfProgressRing');
+  if (ring) { const s = SONGS[0]; ring.style.stroke = s.color; const pct = 18/s.dur*100; ring.style.strokeDashoffset = (414.69*(1-pct/100)).toFixed(2); }
+});
 setInterval(tickSong, 1000);
 
 /* ---- Rotating notifications (3-5 messages cycle every 3-4s) ---- */
+function getNotifSVG(type) {
+  const s = 'stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"';
+  if (type === 'msg')  return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`;
+  if (type === 'img')  return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="white" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>`;
+  if (type === 'mail') return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`;
+  if (type === 'bell') return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`;
+  return `<svg width="12" height="12" viewBox="0 0 24 24" ${s}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`;
+}
+
 const NOTIFS = [
-  { icon: '💬', app: 'Messages · now',    msg: 'Hey! Are you free tonight? 👋' },
-  { icon: '📸', app: 'Instagram · 2m ago', msg: 'Sarah liked your photo ❤️' },
-  { icon: '📧', app: 'Mail · 5m ago',      msg: 'Your weekly summary is ready' },
-  { icon: '💬', app: 'WhatsApp · 1m ago',  msg: 'Voice message from Alex 🎙️' },
-  { icon: '🔔', app: 'Reminders · now',   msg: 'Pick up groceries on the way' },
+  { icon: 'msg',  color: '#34c759', app: 'Messages · now',     msg: 'Hey! Are you free tonight?', watchApp: 'Messages', watchMsg: 'Free tonight?' },
+  { icon: 'img',  color: '#e1306c', app: 'Instagram · 2m ago', msg: 'Sarah liked your photo',      watchApp: 'Instagram', watchMsg: 'Liked your photo' },
+  { icon: 'mail', color: '#3B82F6', app: 'Mail · 5m ago',       msg: 'Your weekly summary is ready', watchApp: 'Mail', watchMsg: 'Weekly summary' },
+  { icon: 'msg',  color: '#25d366', app: 'WhatsApp · 1m ago',   msg: 'Voice message from Alex',     watchApp: 'WhatsApp', watchMsg: 'Voice msg · Alex' },
+  { icon: 'bell', color: '#F97316', app: 'Reminders · now',    msg: 'Pick up groceries',           watchApp: 'Reminder', watchMsg: 'Pick up groceries' },
 ];
 let notifIdx = 0;
 
-function rotateNotif() {
-  const pill = document.getElementById('iphNotif');
-  if (!pill) return;
-
-  // Fade out
-  pill.classList.add('fade-out');
-
+function fadeEl(el, newContent, delay = 0) {
+  if (!el) return;
   setTimeout(() => {
-    notifIdx = (notifIdx + 1) % NOTIFS.length;
-    const n = NOTIFS[notifIdx];
-    const icon = document.getElementById('iphNotifIcon');
-    const app  = document.getElementById('iphNotifApp');
-    const msg  = document.getElementById('iphNotifMsg');
-    if (icon) icon.textContent = n.icon;
-    if (app)  app.textContent  = n.app;
-    if (msg)  msg.textContent  = n.msg;
-    pill.classList.remove('fade-out');
-  }, 420);
+    el.style.transition = 'opacity 0.35s ease';
+    el.style.opacity = '0';
+    setTimeout(() => {
+      if (typeof newContent === 'function') newContent(el);
+      else el.textContent = newContent;
+      el.style.opacity = '1';
+    }, 360);
+  }, delay);
 }
 
-// Rotate every 3.5 seconds
-setInterval(rotateNotif, 3500);
+function rotateNotif() {
+  notifIdx = (notifIdx + 1) % NOTIFS.length;
+  const n = NOTIFS[notifIdx];
+
+  // --- iPhone: fade entire pill ---
+  const pill = document.getElementById('iphNotif');
+  if (pill) {
+    pill.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    pill.style.opacity = '0';
+    pill.style.transform = 'translateY(-6px)';
+    setTimeout(() => {
+      const icon = document.getElementById('iphNotifIcon');
+      const app  = document.getElementById('iphNotifApp');
+      const msg  = document.getElementById('iphNotifMsg');
+      if (icon) icon.textContent = n.icon;
+      if (app)  app.textContent  = n.app;
+      if (msg)  msg.textContent  = n.msg;
+      pill.style.transform = 'translateY(6px)';
+      requestAnimationFrame(() => {
+        pill.style.opacity = '1';
+        pill.style.transform = 'translateY(0)';
+      });
+    }, 370);
+  }
+
+  // --- Watch face: fade title + body simultaneously ---
+  const wfDot     = document.querySelector('.wf-app-dot');
+  const wfAppName = document.querySelector('.wf-app-name');
+  const wfTitle   = document.querySelector('.wf-title');
+  const wfBody    = document.querySelector('.wf-body');
+
+  [wfDot, wfAppName, wfTitle, wfBody].forEach(el => {
+    if (el) { el.style.transition = 'opacity 0.35s ease'; el.style.opacity = '0'; }
+  });
+  setTimeout(() => {
+    if (wfDot)     wfDot.textContent     = n.icon;
+    if (wfAppName) wfAppName.textContent = n.watchApp;
+    if (wfTitle)   wfTitle.textContent   = n.watchApp;
+    if (wfBody)    wfBody.textContent    = n.watchMsg;
+    [wfDot, wfAppName, wfTitle, wfBody].forEach(el => {
+      if (el) el.style.opacity = '1';
+    });
+  }, 370);
+}
+
+// Rotate every 3.8 seconds
+setInterval(rotateNotif, 3800);
+
+// Init first notif icon
+(function initFirstNotif() {
+  const icon = document.getElementById('iphNotifIcon');
+  const wfDot = document.querySelector('.wf-app-dot');
+  const n = NOTIFS[0];
+  if (icon) { icon.style.background = `linear-gradient(135deg, ${n.color}, ${n.color}cc)`; icon.innerHTML = getNotifSVG(n.icon); }
+  if (wfDot) { wfDot.style.background = `linear-gradient(135deg, ${n.color}, ${n.color}cc)`; wfDot.innerHTML = getNotifSVG(n.icon); }
+})();
 
 /* ---- Scroll Reveal (Intersection Observer) ---- */
 const revealEls = document.querySelectorAll('.reveal');
@@ -2817,6 +3006,109 @@ document.querySelectorAll('.pop-in, .slide-left, .slide-right').forEach(el => an
 
 
 
+/* ── FAQ Search ── */
+const faqSearchInput = document.getElementById('faqSearch');
+const faqNoResults = document.getElementById('faqNoResults');
+
+function normalize(str) {
+  return str.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function scoreMatch(query, text) {
+  const q = normalize(query);
+  const t = normalize(text);
+  if (!q) return 1;
+  const words = q.split(' ').filter(Boolean);
+  let score = 0;
+  words.forEach(w => {
+    if (t.includes(w)) score += w.length;
+  });
+  // Bonus for full phrase match
+  if (t.includes(q)) score += q.length * 2;
+  return score;
+}
+
+if (faqSearchInput) {
+  faqSearchInput.addEventListener('input', () => {
+    const query = faqSearchInput.value.trim();
+    const allItems = document.querySelectorAll('.faq-item');
+    const allGroups = document.querySelectorAll('.faq-group');
+    let anyVisible = false;
+
+    // Reset filters when searching
+    if (query) {
+      document.querySelectorAll('.faq-filter').forEach(b => b.classList.remove('active'));
+      allGroups.forEach(g => g.style.display = '');
+    }
+
+    allItems.forEach(item => {
+      const qBtn = item.querySelector('.faq-q');
+      const answer = item.querySelector('.faq-answer-inner');
+      const qText = qBtn ? qBtn.textContent : '';
+      const aText = answer ? answer.textContent : '';
+      const fullText = qText + ' ' + aText;
+
+      if (!query) {
+        item.classList.remove('search-match', 'search-hidden');
+        item.style.display = '';
+        return;
+      }
+
+      const score = scoreMatch(query, fullText);
+      if (score > 0) {
+        item.classList.add('search-match');
+        item.classList.remove('search-hidden');
+        item.style.display = '';
+        anyVisible = true;
+        // No auto-open — user expands manually
+      } else {
+        item.classList.remove('search-match');
+        item.classList.add('search-hidden');
+        item.style.display = 'none';
+      }
+    });
+
+    // Hide groups with no visible items
+    allGroups.forEach(group => {
+      if (!query) { group.style.display = ''; return; }
+      const visibleItems = group.querySelectorAll('.faq-item:not(.search-hidden)');
+      group.style.display = visibleItems.length ? '' : 'none';
+    });
+
+    if (faqNoResults) faqNoResults.style.display = (query && !anyVisible) ? 'block' : 'none';
+  });
+}
+
+/* ── FAQ Anchor link copy + highlight on load ── */
+function copyFaqLink(id, e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const url = window.location.href.split('#')[0] + '#' + id;
+  navigator.clipboard.writeText(url).catch(() => {});
+  // Flash the button
+  const btn = e.target.closest('.faq-anchor-btn');
+  if (btn) {
+    btn.textContent = '✓';
+    setTimeout(() => { btn.textContent = '🔗'; }, 1500);
+  }
+}
+
+// On load: if URL has a hash, open + highlight that FAQ item
+(function checkAnchorOnLoad() {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (!target || !target.classList.contains('faq-item')) return;
+  // Open it
+  target.classList.add('open');
+  // Highlight with pulse
+  setTimeout(() => {
+    target.classList.add('highlight');
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => target.classList.remove('highlight'), 2500);
+  }, 400);
+})();
+
 /* ── FAQ accordion ── */
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -2832,8 +3124,22 @@ const filterBtns = document.querySelectorAll('.faq-filter');
 const faqGroups = document.querySelectorAll('.faq-group');
 const faqItems = document.querySelectorAll('.faq-item');
 
+function clearSearch() {
+  if (faqSearchInput) faqSearchInput.value = '';
+  const clearBtn = document.getElementById('faqClear');
+  if (clearBtn) clearBtn.classList.remove('visible');
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('search-match', 'search-hidden');
+    i.style.display = '';
+  });
+  document.querySelectorAll('.faq-group').forEach(g => g.style.display = '');
+  if (faqNoResults) faqNoResults.style.display = 'none';
+}
+
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
+    // Clear search first
+    clearSearch();
     filterBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const f = btn.dataset.filter;
@@ -2841,6 +3147,26 @@ filterBtns.forEach(btn => {
     faqItems.forEach(i => i.style.display = (f === 'all' || i.dataset.category === f) ? '' : 'none');
   });
 });
+
+// X clear button
+const faqClearBtn = document.getElementById('faqClear');
+if (faqClearBtn) {
+  faqClearBtn.addEventListener('click', () => {
+    clearSearch();
+    // Reset to All
+    filterBtns.forEach(b => b.classList.remove('active'));
+    const allBtn = document.querySelector('.faq-filter[data-filter="all"]');
+    if (allBtn) allBtn.classList.add('active');
+    if (faqSearchInput) faqSearchInput.focus();
+  });
+}
+
+// Show/hide X button as user types
+if (faqSearchInput) {
+  faqSearchInput.addEventListener('input', () => {
+    if (faqClearBtn) faqClearBtn.classList.toggle('visible', faqSearchInput.value.length > 0);
+  });
+}
 </script>
 </body>
 </html>
