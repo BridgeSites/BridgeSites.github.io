@@ -191,18 +191,21 @@ img { max-width: 100%; display: block; }
 /* ---- Reveal Animations ---- */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(24px);
+  filter: blur(2px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.visible {
   opacity: 1;
   transform: none;
+  filter: blur(0px);
 }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.34s; }
 
 /* ====================================
    NAVBAR
@@ -371,6 +374,15 @@ img { max-width: 100%; display: block; }
   padding: calc(var(--nav-h) + 60px) 0 80px;
 }
 
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+    padding: calc(var(--nav-h) + 40px) 0 60px;
+    align-items: flex-start;
+    padding-top: calc(var(--nav-h) + 10vh);
+  }
+}
+
 .hero-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -525,7 +537,7 @@ img { max-width: 100%; display: block; }
 /* Notification watch — large, top-left */
 .wf-notif {
   width: 170px; height: 170px;
-  top: 10px; left: 30px;
+  top: 10px; right: 10px;
   animation: float-a 4s ease-in-out infinite;
   border-color: rgba(52,199,89,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(52,199,89,0.12);
@@ -533,17 +545,17 @@ img { max-width: 100%; display: block; }
 
 /* Heart rate watch — medium, right */
 .wf-health {
-  width: 150px; height: 150px;
-  top: 155px; right: 20px;
+  width: 148px; height: 148px;
+  top: 165px; right: 175px;
   animation: float-b 5s ease-in-out infinite;
   border-color: rgba(249,115,22,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(249,115,22,0.15);
 }
 
-/* Media watch — medium, bottom-left */
+/* Media watch — bottom-right */
 .wf-media {
-  width: 155px; height: 155px;
-  bottom: 20px; left: 60px;
+  width: 152px; height: 152px;
+  bottom: 20px; right: 20px;
   animation: float-c 4.5s ease-in-out infinite;
   border-color: rgba(59,130,246,0.35);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 28px rgba(59,130,246,0.12);
@@ -1253,8 +1265,10 @@ img { max-width: 100%; display: block; }
    RESPONSIVE
 ==================================== */
 @media (max-width: 1024px) {
-  .hero-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .hero-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
   .hero-right { display: flex; }
+  .hero-headline { font-size: clamp(1.9rem, 4vw, 2.8rem); }
+  .hero-sub { font-size: 0.95rem; max-width: 100%; }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .pricing-grid { grid-template-columns: repeat(2, 1fr); }
   .install-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
@@ -1276,18 +1290,56 @@ img { max-width: 100%; display: block; }
   .form-row { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
   .footer-links { grid-template-columns: repeat(2, 1fr); }
-  .hero-headline { font-size: 2.2rem; }
   .section-title { font-size: 1.8rem; }
   .contact-title { font-size: 2rem; }
+
+  /* Hero: single column, text fills full width */
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .hero-right { display: none; }
+  .hero-headline {
+    font-size: clamp(2.2rem, 9vw, 3rem);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-ctas {
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 480px) {
-  .section-inner { padding: 0 16px; }
-  .hero-inner { padding: 0 16px; }
-  .hero-ctas { flex-direction: column; }
-  .btn-primary, .btn-secondary { justify-content: center; }
+  .section-inner { padding: 0 14px; }
+  .hero-inner { padding: 0 14px; }
+  .hero-headline { font-size: clamp(2rem, 10vw, 2.6rem); }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-secondary { justify-content: center; width: 100%; }
+  .hero-stats { gap: 16px; flex-wrap: wrap; }
   .pricing-grid { grid-template-columns: 1fr; }
   .footer-links { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 360px) {
+  .hero-headline { font-size: 1.85rem; }
+  .hero-sub { font-size: 0.9rem; }
 }
 
 /* ====================================
@@ -1405,14 +1457,14 @@ img { max-width: 100%; display: block; }
 /* ---- iPhone mockup ---- */
 .iphone-mockup {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -52%);
-  width: 110px;
-  height: 220px;
+  top: 50%; left: -10px;
+  transform: translateY(-62%);
+  width: 140px;
+  height: 280px;
   background: linear-gradient(160deg, #1c1c1e 0%, #2c2c2e 100%);
-  border-radius: 28px;
+  border-radius: 34px;
   border: 2px solid rgba(255,255,255,0.12);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow: 0 28px 72px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1421,14 +1473,14 @@ img { max-width: 100%; display: block; }
   z-index: 0;
 }
 [data-theme="light"] .iphone-mockup {
-  background: linear-gradient(160deg, #e5e5ea 0%, #d1d1d6 100%);
-  border-color: rgba(0,0,0,0.1);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
+  background: linear-gradient(160deg, #c8c8cc 0%, #aeaeb2 100%);
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.8);
 }
 .iphone-notch {
-  width: 42px; height: 10px;
+  width: 52px; height: 12px;
   background: #000;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 10px 10px;
   margin-top: 0;
   flex-shrink: 0;
   position: relative;
@@ -1444,7 +1496,7 @@ img { max-width: 100%; display: block; }
   gap: 4px;
   overflow: hidden;
 }
-[data-theme="light"] .iphone-screen { background: #1c1c1e; }
+[data-theme="light"] .iphone-screen { background: #0a0a0a; }
 .iphone-statusbar {
   display: flex;
   justify-content: space-between;
@@ -1464,16 +1516,16 @@ img { max-width: 100%; display: block; }
   gap: 5px;
 }
 .iph-notif-icon {
-  width: 16px; height: 16px;
-  border-radius: 5px;
+  width: 22px; height: 22px;
+  border-radius: 6px;
   background: linear-gradient(135deg, #34c759, #30b055);
   display: flex; align-items: center; justify-content: center;
-  font-size: 8px;
+  font-size: 11px;
   flex-shrink: 0;
 }
 .iph-notif-text { display: flex; flex-direction: column; gap: 1px; flex: 1; overflow: hidden; }
-.iph-notif-app { font-size: 6px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; }
-.iph-notif-msg { font-size: 7px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.iph-notif-app { font-size: 7.5px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; }
+.iph-notif-msg { font-size: 8.5px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .iphone-health-widget {
   background: linear-gradient(135deg, rgba(249,115,22,0.2), rgba(239,68,68,0.15));
@@ -1486,9 +1538,9 @@ img { max-width: 100%; display: block; }
 }
 .iph-hw-icon { font-size: 10px; }
 .iph-hw-text { display: flex; flex-direction: column; }
-.iph-hw-label { font-size: 5.5px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; }
-.iph-hw-val { font-size: 10px; font-weight: 800; color: #fff; line-height: 1; }
-.iph-hw-unit { font-size: 5px; color: rgba(255,255,255,0.4); }
+.iph-hw-label { font-size: 7px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; }
+.iph-hw-val { font-size: 13px; font-weight: 800; color: #fff; line-height: 1; }
+.iph-hw-unit { font-size: 6.5px; color: rgba(255,255,255,0.4); }
 
 .iphone-media-widget {
   background: rgba(255,255,255,0.05);
@@ -1500,16 +1552,16 @@ img { max-width: 100%; display: block; }
   gap: 5px;
 }
 .iph-album {
-  width: 20px; height: 20px;
-  border-radius: 5px;
+  width: 28px; height: 28px;
+  border-radius: 7px;
   background: linear-gradient(135deg, var(--orange), #f43f5e);
   display: flex; align-items: center; justify-content: center;
-  font-size: 9px;
+  font-size: 12px;
   flex-shrink: 0;
 }
-.iph-song { font-size: 6.5px; font-weight: 700; color: rgba(255,255,255,0.9); }
-.iph-artist { font-size: 5.5px; color: rgba(255,255,255,0.4); }
-.iph-controls { display: flex; gap: 4px; margin-left: auto; font-size: 8px; color: rgba(255,255,255,0.6); }
+.iph-song { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.9); }
+.iph-artist { font-size: 6.5px; color: rgba(255,255,255,0.4); }
+.iph-controls { display: flex; gap: 4px; margin-left: auto; font-size: 10px; color: rgba(255,255,255,0.6); }
 
 .iphone-home-bar {
   width: 36px; height: 3px;
@@ -1533,6 +1585,127 @@ img { max-width: 100%; display: block; }
   .hero-right { display: none; }
 }
 
+
+/* ── Show more button (mobile features) ── */
+.features-showmore {
+  display: none;
+  justify-content: center;
+  margin-top: 24px;
+}
+.features-showmore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all var(--trans);
+}
+.features-showmore-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.features-showmore-btn svg {
+  transition: transform 0.3s;
+}
+.features-showmore-btn.open svg {
+  transform: rotate(180deg);
+}
+
+/* ── Extra scroll animations ── */
+/* Scale-in pop for cards */
+.pop-in {
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  filter: blur(1px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+              transform 0.6s cubic-bezier(0.22,1,0.36,1),
+              filter 0.5s ease;
+}
+.pop-in.visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* Slide in from left */
+.slide-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+              transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.slide-left.visible { opacity: 1; transform: none; }
+
+/* Slide in from right */
+.slide-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+              transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.slide-right.visible { opacity: 1; transform: none; }
+
+/* Mobile: hide extra feature cards */
+@media (max-width: 768px) {
+  .feature-card--extra {
+    display: none;
+  }
+  .feature-card--extra.mobile-shown {
+    display: block;
+    animation: fadeInUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .features-showmore { display: flex; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Mobile tablet for mockup scene */
+@media (max-width: 1024px) {
+  .iphone-mockup { width: 110px; height: 220px; border-radius: 28px; left: -5px; }
+  .wf-notif { width: 130px; height: 130px; right: 5px; top: 8px; }
+  .wf-health { width: 112px; height: 112px; top: 128px; right: 133px; }
+  .wf-media { width: 118px; height: 118px; bottom: 10px; right: 5px; }
+}
+
+
+/* iPhone progress bar */
+.iph-progress-track {
+  width: 100%; height: 2px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px; overflow: hidden;
+  margin-bottom: 3px;
+}
+.iph-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--orange), #f43f5e);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+.iph-progress-times {
+  display: flex; justify-content: space-between;
+  font-size: 5.5px; color: rgba(255,255,255,0.35);
+}
+/* Notification fade transition */
+.iphone-notif-pill {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.iphone-notif-pill.fade-out {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+/* Watch media face sync */
+.wf-song, .wf-artist { transition: opacity 0.3s ease; }
+
 </style>
 </head>
 <body>
@@ -1550,7 +1723,7 @@ img { max-width: 100%; display: block; }
   <!-- ====== NAVBAR ====== -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
-      <a href="#" class="nav-logo"> Bridge
+      <a href="#hero" class="nav-logo">Bridge
       </a>
       <div class="nav-links">
         <a href="#features">Features</a>
@@ -1650,8 +1823,8 @@ img { max-width: 100%; display: block; }
             <div class="wf-media-arc"></div>
             <div class="wf-inner">
               <div class="wf-note">♪</div>
-              <div class="wf-song">Midnight Rain</div>
-              <div class="wf-artist">Taylor Swift</div>
+              <div class="wf-song" id="wfSong">Midnight Rain</div>
+              <div class="wf-artist" id="wfArtist">Taylor Swift</div>
               <div class="wf-controls">
                 <span class="wf-btn">⏮</span>
                 <span class="wf-btn wf-btn-play">⏸</span>
@@ -1669,11 +1842,11 @@ img { max-width: 100%; display: block; }
                 <span>●●●</span>
               </div>
               <!-- Notification from watch -->
-              <div class="iphone-notif-pill">
-                <div class="iph-notif-icon">💬</div>
+              <div class="iphone-notif-pill" id="iphNotif">
+                <div class="iph-notif-icon" id="iphNotifIcon">💬</div>
                 <div class="iph-notif-text">
-                  <span class="iph-notif-app">Messages · now</span>
-                  <span class="iph-notif-msg">Hey! Are you free tonight?</span>
+                  <span class="iph-notif-app" id="iphNotifApp">Messages · now</span>
+                  <span class="iph-notif-msg" id="iphNotifMsg">Hey! Are you free tonight?</span>
                 </div>
               </div>
               <!-- Health synced widget -->
@@ -1685,13 +1858,22 @@ img { max-width: 100%; display: block; }
                 </div>
               </div>
               <!-- Media playing -->
-              <div class="iphone-media-widget">
-                <div class="iph-album">♪</div>
-                <div>
-                  <div class="iph-song">Midnight Rain</div>
-                  <div class="iph-artist">Taylor Swift</div>
+              <div class="iphone-media-widget" id="iphMediaWidget">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                  <div class="iph-album" id="iphAlbumIcon">♪</div>
+                  <div style="flex:1;min-width:0;">
+                    <div class="iph-song" id="iphSong">Midnight Rain</div>
+                    <div class="iph-artist" id="iphArtist">Taylor Swift</div>
+                  </div>
+                  <div class="iph-controls">⏸</div>
                 </div>
-                <div class="iph-controls">⏮ ⏸ ⏭</div>
+                <div class="iph-progress-track">
+                  <div class="iph-progress-fill" id="iphProgress"></div>
+                </div>
+                <div class="iph-progress-times">
+                  <span id="iphCurrent">0:00</span>
+                  <span id="iphDuration">3:24</span>
+                </div>
               </div>
             </div>
             <div class="iphone-home-bar"></div>
@@ -1711,7 +1893,7 @@ img { max-width: 100%; display: block; }
         <span class="title-sub">Everything you need for seamless device integration</span>
       </h2>
 
-      <div class="features-grid">
+      <div class="features-grid" id="featuresGrid">
         <div class="feature-card reveal" data-delay="0">
           <div class="feature-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
@@ -1748,7 +1930,8 @@ img { max-width: 100%; display: block; }
           <div class="feature-glow feature-glow--accent"></div>
         </div>
 
-        <div class="feature-card reveal" data-delay="150">
+        <!-- Cards 4-9: hidden on mobile by default -->
+        <div class="feature-card reveal feature-card--extra" data-delay="150">
           <div class="feature-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </div>
@@ -1757,7 +1940,7 @@ img { max-width: 100%; display: block; }
           <div class="feature-glow"></div>
         </div>
 
-        <div class="feature-card reveal" data-delay="200">
+        <div class="feature-card reveal feature-card--extra" data-delay="200">
           <div class="feature-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
@@ -1766,7 +1949,7 @@ img { max-width: 100%; display: block; }
           <div class="feature-glow"></div>
         </div>
 
-        <div class="feature-card reveal" data-delay="250">
+        <div class="feature-card reveal feature-card--extra" data-delay="250">
           <div class="feature-icon feature-icon--blue">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
@@ -1775,7 +1958,7 @@ img { max-width: 100%; display: block; }
           <div class="feature-glow feature-glow--blue"></div>
         </div>
 
-        <div class="feature-card reveal" data-delay="300">
+        <div class="feature-card reveal feature-card--extra" data-delay="300">
           <div class="feature-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
           </div>
@@ -1784,7 +1967,7 @@ img { max-width: 100%; display: block; }
           <div class="feature-glow"></div>
         </div>
 
-        <div class="feature-card reveal" data-delay="350">
+        <div class="feature-card reveal feature-card--extra" data-delay="350">
           <div class="feature-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
           </div>
@@ -1793,7 +1976,7 @@ img { max-width: 100%; display: block; }
           <div class="feature-glow"></div>
         </div>
 
-        <div class="feature-card reveal" data-delay="400">
+        <div class="feature-card reveal feature-card--extra" data-delay="400">
           <div class="feature-icon feature-icon--cyan">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           </div>
@@ -1801,6 +1984,14 @@ img { max-width: 100%; display: block; }
           <p>Manage photos, videos, files, and apps on your watch. Browse, upload, download, and organize content from your iPhone.</p>
           <div class="feature-glow feature-glow--cyan"></div>
         </div>
+      </div>
+
+      <!-- Show more button — mobile only -->
+      <div class="features-showmore" id="featuresShowMore">
+        <button class="features-showmore-btn" id="featuresShowMoreBtn">
+          <span>Show all features</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -2119,7 +2310,7 @@ img { max-width: 100%; display: block; }
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="#" class="nav-logo"> Bridge
+          <a href="#hero" class="nav-logo">Bridge
           </a>
           <p>Seamless integration between Wear OS and iPhone. Built with care by Orienlabs LLC.</p>
           <div class="footer-social">
@@ -2214,8 +2405,14 @@ const gridCanvas = document.getElementById('gridCanvas');
 const ctx = gridCanvas.getContext('2d');
 let mouseX = -9999, mouseY = -9999;
 let tMouseX = -9999, tMouseY = -9999;
-const GRID = 28;   // tiny squares
-const RADIUS = 130; // radius around cursor that brightens
+const GRID = 28;
+const RADIUS = 100; // reduced radius
+
+// currentIntensity: the animated brightness level (0 = off, 1 = full)
+// It eases toward targetIntensity slowly for a smooth fade-in/out
+let currentIntensity = 0;
+let targetIntensity = 0;
+const FADE_SPEED = 0.035; // slow fade — lower = slower
 
 function resizeCanvas() {
   gridCanvas.width = window.innerWidth;
@@ -2227,28 +2424,36 @@ window.addEventListener('resize', resizeCanvas, { passive: true });
 document.addEventListener('mousemove', (e) => {
   tMouseX = e.clientX;
   tMouseY = e.clientY;
+  targetIntensity = 1; // mouse is active, fade in
 }, { passive: true });
 
+// When mouse leaves window, fade out
+document.addEventListener('mouseleave', () => {
+  targetIntensity = 0;
+});
+
 function drawGrid() {
-  mouseX += (tMouseX - mouseX) * 0.1;
-  mouseY += (tMouseY - mouseY) * 0.1;
+  // Smooth cursor follow
+  mouseX += (tMouseX - mouseX) * 0.08;
+  mouseY += (tMouseY - mouseY) * 0.08;
+
+  // Slowly ease intensity toward target (fade in/out animation)
+  currentIntensity += (targetIntensity - currentIntensity) * FADE_SPEED;
 
   ctx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
 
   const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
   const baseAlpha = isDark ? 0.055 : 0.035;
-  const brightAlpha = isDark ? 0.32 : 0.13;
+  const peakExtra  = isDark ? 0.22  : 0.10; // max extra brightness added at center
 
   const cols = Math.ceil(gridCanvas.width / GRID) + 1;
   const rows = Math.ceil(gridCanvas.height / GRID) + 1;
 
-  // Draw vertical lines — each drawn in two segments:
-  // the base-alpha full line, then overlay a bright segment near the cursor
+  // Vertical lines
   for (let c = 0; c <= cols; c++) {
     const x = c * GRID;
-    const distX = Math.abs(x - mouseX);
 
-    // Full line at base alpha
+    // Always draw base line
     ctx.beginPath();
     ctx.moveTo(x, 0);
     ctx.lineTo(x, gridCanvas.height);
@@ -2256,32 +2461,31 @@ function drawGrid() {
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    // Only draw bright segment if line is within horizontal radius
-    if (distX < RADIUS) {
-      // Compute the bright segment: y range where distance to cursor < RADIUS
-      const halfLen = Math.sqrt(Math.max(0, RADIUS * RADIUS - distX * distX));
-      const y0 = mouseY - halfLen;
-      const y1 = mouseY + halfLen;
-
-      // Fade alpha based on how far the line is horizontally
-      const horizProx = 1 - distX / RADIUS;
-      const segAlpha = baseAlpha + (brightAlpha - baseAlpha) * horizProx * horizProx;
-
-      ctx.beginPath();
-      ctx.moveTo(x, y0);
-      ctx.lineTo(x, y1);
-      ctx.strokeStyle = isDark ? `rgba(255,255,255,${segAlpha})` : `rgba(0,0,0,${segAlpha})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
+    // Bright segment only if mouse is nearby and intensity > ~0
+    if (currentIntensity > 0.005) {
+      const distX = Math.abs(x - mouseX);
+      if (distX < RADIUS) {
+        const halfLen = Math.sqrt(Math.max(0, RADIUS * RADIUS - distX * distX));
+        const y0 = mouseY - halfLen;
+        const y1 = mouseY + halfLen;
+        const horizProx = 1 - distX / RADIUS;
+        // Apply currentIntensity to gate the extra alpha (smooth fade)
+        const extra = peakExtra * horizProx * horizProx * currentIntensity;
+        const segAlpha = baseAlpha + extra;
+        ctx.beginPath();
+        ctx.moveTo(x, y0);
+        ctx.lineTo(x, y1);
+        ctx.strokeStyle = isDark ? `rgba(255,255,255,${segAlpha})` : `rgba(0,0,0,${segAlpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
     }
   }
 
-  // Draw horizontal lines — same approach
+  // Horizontal lines
   for (let r = 0; r <= rows; r++) {
     const y = r * GRID;
-    const distY = Math.abs(y - mouseY);
 
-    // Full line at base alpha
     ctx.beginPath();
     ctx.moveTo(0, y);
     ctx.lineTo(gridCanvas.width, y);
@@ -2289,21 +2493,22 @@ function drawGrid() {
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    // Only draw bright segment if line is within vertical radius
-    if (distY < RADIUS) {
-      const halfLen = Math.sqrt(Math.max(0, RADIUS * RADIUS - distY * distY));
-      const x0 = mouseX - halfLen;
-      const x1 = mouseX + halfLen;
-
-      const vertProx = 1 - distY / RADIUS;
-      const segAlpha = baseAlpha + (brightAlpha - baseAlpha) * vertProx * vertProx;
-
-      ctx.beginPath();
-      ctx.moveTo(x0, y);
-      ctx.lineTo(x1, y);
-      ctx.strokeStyle = isDark ? `rgba(255,255,255,${segAlpha})` : `rgba(0,0,0,${segAlpha})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
+    if (currentIntensity > 0.005) {
+      const distY = Math.abs(y - mouseY);
+      if (distY < RADIUS) {
+        const halfLen = Math.sqrt(Math.max(0, RADIUS * RADIUS - distY * distY));
+        const x0 = mouseX - halfLen;
+        const x1 = mouseX + halfLen;
+        const vertProx = 1 - distY / RADIUS;
+        const extra = peakExtra * vertProx * vertProx * currentIntensity;
+        const segAlpha = baseAlpha + extra;
+        ctx.beginPath();
+        ctx.moveTo(x0, y);
+        ctx.lineTo(x1, y);
+        ctx.strokeStyle = isDark ? `rgba(255,255,255,${segAlpha})` : `rgba(0,0,0,${segAlpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
     }
   }
 
@@ -2370,6 +2575,95 @@ function updateIphTime() {
 }
 updateIphTime();
 setInterval(updateIphTime, 10000);
+
+/* ---- Animated Songs (cycle 2-3 songs with live progress bar) ---- */
+const SONGS = [
+  { title: 'Midnight Rain',  artist: 'Taylor Swift',   icon: '♪', dur: 204, color: '#f43f5e' },
+  { title: 'Blinding Lights', artist: 'The Weeknd',    icon: '🎵', dur: 200, color: '#F97316' },
+  { title: 'As It Was',       artist: 'Harry Styles',  icon: '🎶', dur: 167, color: '#22D3EE' },
+];
+let songIdx = 0;
+let songElapsed = 0; // seconds
+const SONG_TICK = 1; // advance 1s every real second (sped up × a bit)
+
+function fmtTime(s) {
+  return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+}
+
+function loadSong(idx, startAt = 0) {
+  const s = SONGS[idx];
+  songElapsed = startAt;
+
+  // Update iPhone
+  const iphSong = document.getElementById('iphSong');
+  const iphArtist = document.getElementById('iphArtist');
+  const iphAlbum = document.getElementById('iphAlbumIcon');
+  const iphDur = document.getElementById('iphDuration');
+  if (iphSong) iphSong.textContent = s.title;
+  if (iphArtist) iphArtist.textContent = s.artist;
+  if (iphAlbum) { iphAlbum.textContent = s.icon; iphAlbum.style.background = `linear-gradient(135deg, ${s.color}, #1a1a2e)`; }
+  if (iphDur) iphDur.textContent = fmtTime(s.dur);
+
+  // Update watch face
+  const wfSong = document.getElementById('wfSong');
+  const wfArtist = document.getElementById('wfArtist');
+  if (wfSong) { wfSong.style.opacity = '0'; setTimeout(() => { wfSong.textContent = s.title; wfSong.style.opacity = '1'; }, 300); }
+  if (wfArtist) { wfArtist.style.opacity = '0'; setTimeout(() => { wfArtist.textContent = s.artist; wfArtist.style.opacity = '1'; }, 350); }
+}
+
+function tickSong() {
+  const s = SONGS[songIdx];
+  songElapsed += SONG_TICK;
+
+  // Update progress bar
+  const pct = Math.min((songElapsed / s.dur) * 100, 100);
+  const fill = document.getElementById('iphProgress');
+  const cur = document.getElementById('iphCurrent');
+  if (fill) fill.style.width = pct + '%';
+  if (cur) cur.textContent = fmtTime(songElapsed);
+
+  // Song ended → next song
+  if (songElapsed >= s.dur) {
+    songIdx = (songIdx + 1) % SONGS.length;
+    loadSong(songIdx, 0);
+  }
+}
+
+loadSong(0, 18); // start 18s into first song so progress bar is visible immediately
+setInterval(tickSong, 1000);
+
+/* ---- Rotating notifications (3-5 messages cycle every 3-4s) ---- */
+const NOTIFS = [
+  { icon: '💬', app: 'Messages · now',    msg: 'Hey! Are you free tonight? 👋' },
+  { icon: '📸', app: 'Instagram · 2m ago', msg: 'Sarah liked your photo ❤️' },
+  { icon: '📧', app: 'Mail · 5m ago',      msg: 'Your weekly summary is ready' },
+  { icon: '💬', app: 'WhatsApp · 1m ago',  msg: 'Voice message from Alex 🎙️' },
+  { icon: '🔔', app: 'Reminders · now',   msg: 'Pick up groceries on the way' },
+];
+let notifIdx = 0;
+
+function rotateNotif() {
+  const pill = document.getElementById('iphNotif');
+  if (!pill) return;
+
+  // Fade out
+  pill.classList.add('fade-out');
+
+  setTimeout(() => {
+    notifIdx = (notifIdx + 1) % NOTIFS.length;
+    const n = NOTIFS[notifIdx];
+    const icon = document.getElementById('iphNotifIcon');
+    const app  = document.getElementById('iphNotifApp');
+    const msg  = document.getElementById('iphNotifMsg');
+    if (icon) icon.textContent = n.icon;
+    if (app)  app.textContent  = n.app;
+    if (msg)  msg.textContent  = n.msg;
+    pill.classList.remove('fade-out');
+  }, 420);
+}
+
+// Rotate every 3.5 seconds
+setInterval(rotateNotif, 3500);
 
 /* ---- Scroll Reveal (Intersection Observer) ---- */
 const revealEls = document.querySelectorAll('.reveal');
@@ -2506,6 +2800,136 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+/* ---- Staggered child reveals inside feature/pricing/device grids ---- */
+document.querySelectorAll('.features-grid, .pricing-grid, .devices-grid').forEach(grid => {
+  const children = grid.querySelectorAll('.feature-card, .pricing-card, .device-card');
+  children.forEach((el, i) => {
+    el.style.transitionDelay = `${i * 60}ms`;
+  });
+});
+
+/* ---- Smooth counter animation for hero stats ---- */
+function animateCount(el, target, suffix = '') {
+  let start = 0;
+  const duration = 1200;
+  const startTime = performance.now();
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(start + (target - start) * eased) + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Observe hero stats and animate when visible
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) {
+  const statsObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      statsObserver.disconnect();
+      // Animate the "9+" stat
+      const vals = statsEl.querySelectorAll('.stat-val');
+      vals.forEach(v => {
+        if (v.textContent.includes('9+')) animateCount(v, 9, '+');
+      });
+    }
+  }, { threshold: 0.5 });
+  statsObserver.observe(statsEl);
+}
+
+/* ---- Pricing card mouse-follow inner glow ---- */
+document.querySelectorAll('.pricing-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+    const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+    card.style.background = `radial-gradient(circle at ${x}% ${y}%, var(--surface-hover) 0%, var(--surface) 70%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.background = '';
+  });
+});
+
+/* ---- Timeline dot pulse on scroll into view ---- */
+document.querySelectorAll('.timeline-dot').forEach((dot, i) => {
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      setTimeout(() => {
+        dot.style.transform = 'translateX(-50%) scale(1.2)';
+        setTimeout(() => dot.style.transform = 'translateX(-50%) scale(1)', 300);
+      }, i * 120);
+      obs.disconnect();
+    }
+  }, { threshold: 0.8 });
+  obs.observe(dot);
+});
+
+/* ---- Smooth theme transition: add class during switch ---- */
+const origThemeClick = themeToggle.onclick;
+themeToggle.addEventListener('click', () => {
+  document.body.style.transition = 'background 0.5s, color 0.5s';
+  setTimeout(() => { document.body.style.transition = ''; }, 600);
+});
+
+
+
+/* ── Show More features (mobile) ── */
+const showMoreBtn = document.getElementById('featuresShowMoreBtn');
+if (showMoreBtn) {
+  showMoreBtn.addEventListener('click', () => {
+    const extras = document.querySelectorAll('.feature-card--extra');
+    const isOpen = showMoreBtn.classList.contains('open');
+    showMoreBtn.classList.toggle('open');
+    showMoreBtn.querySelector('span').textContent = isOpen ? 'Show all features' : 'Show less';
+    extras.forEach((card, i) => {
+      if (!isOpen) {
+        card.classList.add('mobile-shown');
+        card.style.animationDelay = i * 60 + 'ms';
+        // Trigger reveal
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, i * 60 + 50);
+      } else {
+        card.classList.remove('mobile-shown', 'visible');
+      }
+    });
+  });
+}
+
+/* ── Enhanced scroll animations: pop-in for cards, slide for timeline ── */
+// Add pop-in class to cards
+document.querySelectorAll('.feature-card, .pricing-card, .device-card, .timeline-card, .contact-card').forEach((el, i) => {
+  el.classList.add('pop-in');
+  el.style.transitionDelay = (i % 3) * 70 + 'ms';
+});
+
+// Slide timeline items alternately
+document.querySelectorAll('.timeline-item').forEach((el, i) => {
+  el.classList.add(i % 2 === 0 ? 'slide-left' : 'slide-right');
+});
+
+// Section labels slide in from left
+document.querySelectorAll('.section-label').forEach(el => {
+  el.classList.add('slide-left');
+});
+
+// Combined observer for all animation classes
+const animObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const delay = parseInt(el.dataset.delay || el.style.transitionDelay || 0);
+      setTimeout(() => el.classList.add('visible'), typeof delay === 'number' ? delay : 0);
+      animObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.pop-in, .slide-left, .slide-right').forEach(el => animObserver.observe(el));
 
 </script>
 </body>
