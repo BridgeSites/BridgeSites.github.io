@@ -132,16 +132,16 @@ img { max-width: 100%; display: block; }
   width: 500px; height: 500px;
   bottom: -100px; left: -100px;
   background: var(--blue);
-  opacity: 0.22;
+  opacity: 0.28;
 }
 .glow-orange {
   width: 400px; height: 400px;
   top: -80px; right: -80px;
   background: var(--orange);
-  opacity: 0.18;
+  opacity: 0.22;
 }
-[data-theme="light"] .glow-blue { opacity: 0.1; }
-[data-theme="light"] .glow-orange { opacity: 0.09; }
+[data-theme="light"] .glow-blue { opacity: 0.06; }
+[data-theme="light"] .glow-orange { opacity: 0.055; }
 
 /* ---- Layout Helpers ---- */
 .section-inner {
@@ -1253,8 +1253,8 @@ img { max-width: 100%; display: block; }
    RESPONSIVE
 ==================================== */
 @media (max-width: 1024px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 60px; }
-  .hero-right { display: none; }
+  .hero-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .hero-right { display: flex; }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .pricing-grid { grid-template-columns: repeat(2, 1fr); }
   .install-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
@@ -1401,6 +1401,138 @@ img { max-width: 100%; display: block; }
 
 /* Remove old install-steps CSS */
 
+
+/* ---- iPhone mockup ---- */
+.iphone-mockup {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -52%);
+  width: 110px;
+  height: 220px;
+  background: linear-gradient(160deg, #1c1c1e 0%, #2c2c2e 100%);
+  border-radius: 28px;
+  border: 2px solid rgba(255,255,255,0.12);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  animation: float-a 4.2s ease-in-out infinite;
+  z-index: 0;
+}
+[data-theme="light"] .iphone-mockup {
+  background: linear-gradient(160deg, #e5e5ea 0%, #d1d1d6 100%);
+  border-color: rgba(0,0,0,0.1);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
+}
+.iphone-notch {
+  width: 42px; height: 10px;
+  background: #000;
+  border-radius: 0 0 8px 8px;
+  margin-top: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+.iphone-screen {
+  flex: 1;
+  width: 100%;
+  background: #000;
+  padding: 6px 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+[data-theme="light"] .iphone-screen { background: #1c1c1e; }
+.iphone-statusbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 6px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 4px;
+  padding: 0 2px;
+}
+.iphone-notif-pill {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 5px 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.iph-notif-icon {
+  width: 16px; height: 16px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #34c759, #30b055);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px;
+  flex-shrink: 0;
+}
+.iph-notif-text { display: flex; flex-direction: column; gap: 1px; flex: 1; overflow: hidden; }
+.iph-notif-app { font-size: 6px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; }
+.iph-notif-msg { font-size: 7px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.iphone-health-widget {
+  background: linear-gradient(135deg, rgba(249,115,22,0.2), rgba(239,68,68,0.15));
+  border: 1px solid rgba(249,115,22,0.25);
+  border-radius: 10px;
+  padding: 5px 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.iph-hw-icon { font-size: 10px; }
+.iph-hw-text { display: flex; flex-direction: column; }
+.iph-hw-label { font-size: 5.5px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; }
+.iph-hw-val { font-size: 10px; font-weight: 800; color: #fff; line-height: 1; }
+.iph-hw-unit { font-size: 5px; color: rgba(255,255,255,0.4); }
+
+.iphone-media-widget {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 5px 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.iph-album {
+  width: 20px; height: 20px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--orange), #f43f5e);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+}
+.iph-song { font-size: 6.5px; font-weight: 700; color: rgba(255,255,255,0.9); }
+.iph-artist { font-size: 5.5px; color: rgba(255,255,255,0.4); }
+.iph-controls { display: flex; gap: 4px; margin-left: auto; font-size: 8px; color: rgba(255,255,255,0.6); }
+
+.iphone-home-bar {
+  width: 36px; height: 3px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 2px;
+  margin: 4px auto;
+  flex-shrink: 0;
+}
+
+/* Tablet: smaller mockup scene */
+@media (max-width: 1024px) {
+  .mockup-scene { width: 320px; height: 360px; }
+  .wf-notif { width: 130px; height: 130px; top: 8px; left: 10px; }
+  .wf-health { width: 115px; height: 115px; top: 120px; right: 5px; }
+  .wf-media { width: 120px; height: 120px; bottom: 10px; left: 30px; }
+  .iphone-mockup { width: 86px; height: 172px; border-radius: 22px; }
+  .wf-notif .wf-hr-val { font-size: 20px; }
+}
+
+@media (max-width: 768px) {
+  .hero-right { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -1526,6 +1658,43 @@ img { max-width: 100%; display: block; }
                 <span class="wf-btn">⏭</span>
               </div>
             </div>
+          </div>
+
+          <!-- iPhone mockup — center anchor -->
+          <div class="iphone-mockup" id="mockup4">
+            <div class="iphone-notch"></div>
+            <div class="iphone-screen">
+              <div class="iphone-statusbar">
+                <span id="iphTime">9:41</span>
+                <span>●●●</span>
+              </div>
+              <!-- Notification from watch -->
+              <div class="iphone-notif-pill">
+                <div class="iph-notif-icon">💬</div>
+                <div class="iph-notif-text">
+                  <span class="iph-notif-app">Messages · now</span>
+                  <span class="iph-notif-msg">Hey! Are you free tonight?</span>
+                </div>
+              </div>
+              <!-- Health synced widget -->
+              <div class="iphone-health-widget">
+                <span class="iph-hw-icon">❤️</span>
+                <div class="iph-hw-text">
+                  <span class="iph-hw-label">Heart Rate</span>
+                  <span><span class="iph-hw-val" id="iphHR">72</span> <span class="iph-hw-unit">BPM</span></span>
+                </div>
+              </div>
+              <!-- Media playing -->
+              <div class="iphone-media-widget">
+                <div class="iph-album">♪</div>
+                <div>
+                  <div class="iph-song">Midnight Rain</div>
+                  <div class="iph-artist">Taylor Swift</div>
+                </div>
+                <div class="iph-controls">⏮ ⏸ ⏭</div>
+              </div>
+            </div>
+            <div class="iphone-home-bar"></div>
           </div>
 
         </div>
@@ -2067,8 +2236,8 @@ function drawGrid() {
   ctx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
 
   const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-  const baseAlpha = isDark ? 0.032 : 0.05;
-  const brightAlpha = isDark ? 0.22 : 0.18;
+  const baseAlpha = isDark ? 0.055 : 0.035;
+  const brightAlpha = isDark ? 0.32 : 0.13;
 
   const cols = Math.ceil(gridCanvas.width / GRID) + 1;
   const rows = Math.ceil(gridCanvas.height / GRID) + 1;
@@ -2190,6 +2359,18 @@ function updateWatchTime() {
 updateWatchTime();
 setInterval(updateWatchTime, 10000);
 
+/* sync iPhone clock */
+function updateIphTime() {
+  const el = document.getElementById('iphTime');
+  if (!el) return;
+  const n = new Date();
+  const h = n.getHours() % 12 || 12;
+  const m = n.getMinutes().toString().padStart(2,'0');
+  el.textContent = h + ':' + m;
+}
+updateIphTime();
+setInterval(updateIphTime, 10000);
+
 /* ---- Scroll Reveal (Intersection Observer) ---- */
 const revealEls = document.querySelectorAll('.reveal');
 
@@ -2304,6 +2485,8 @@ if (hrEl) {
     if (hrBase >= 78) hrDir = -1;
     if (hrBase <= 68) hrDir = 1;
     hrEl.textContent = hrBase;
+    const iphHR = document.getElementById('iphHR');
+    if (iphHR) iphHR.textContent = hrBase;
   }, 1800);
 }
 
